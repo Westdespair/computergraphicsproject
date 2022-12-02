@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "live-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "live-server": "^1.2.2",
-    "three": "^0.147.0"
+    "live-server": "^1.2.2"
   }
 }
