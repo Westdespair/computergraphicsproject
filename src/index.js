@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import { Group } from 'three';
 
 const canvas = document.getElementById('canvas');
 
@@ -12,14 +13,15 @@ renderer.setSize( canvas.clientWidth, canvas.clientHeight );
 document.body.appendChild( renderer.domElement );
 
 const cube_geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const cube_material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const cube_material = new THREE.MeshPhongMaterial( { color: 0x00ff00, specular: 0xffffff } );
 const cube = new THREE.Mesh( cube_geometry, cube_material );
 cube.position.x = 4;
 scene.add( cube );
 
 const loader = new FontLoader();
-let text;
-loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+const textgroup = new THREE.Group();
+
+loader.load( 'res/fonts/helvetiker_regular.typeface.json', function ( font ) {
     const text_geometry = new TextGeometry( '! You are winner !', {
         font: font,
         size: 0.3,
@@ -33,12 +35,14 @@ loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
     } );
 
     const text_material = new THREE.MeshPhongMaterial( { color: 0xff00ff, specular: 0xffffff } );
-    text = new THREE.Mesh( text_geometry, text_material );
-    text.position.x = 0; text.position.y = 0; text.position.z = 1;
-    scene.add( text );
+    const text = new THREE.Mesh( text_geometry, text_material );
+    text_geometry.computeBoundingBox();
+    text.position.x -= text_geometry.boundingBox.max.x / 2;
+    textgroup.add( text );
 } );
+scene.add(textgroup);
 
-const light = new THREE.PointLight( 0xffffff, 1, 100 );
+const light = new THREE.PointLight( 0xffffff, 2, 100 );
 light.position.set( 2, 5, 20 );
 scene.add( light );
 
@@ -50,8 +54,8 @@ function animate() {
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
 
-    text.rotation.x -= 0.01;
-    text.rotation.z += 0.008;
+    textgroup.rotation.x -= 0.01;
+    textgroup.rotation.z += 0.008;
     renderer.render( scene, camera );
 };
 
