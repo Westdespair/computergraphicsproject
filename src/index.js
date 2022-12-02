@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-import { Group } from 'three';
 
 const canvas = document.getElementById('canvas');
 
@@ -10,7 +9,6 @@ const camera = new THREE.PerspectiveCamera( 75, canvas.clientWidth / canvas.clie
 
 const renderer = new THREE.WebGLRenderer( { canvas: canvas } );
 renderer.setSize( canvas.clientWidth, canvas.clientHeight );
-document.body.appendChild( renderer.domElement );
 
 const cube_geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const cube_material = new THREE.MeshPhongMaterial( { color: 0x00ff00, specular: 0xffffff } );
@@ -50,13 +48,17 @@ camera.position.z = 5;
 
 function animate() {
     requestAnimationFrame( animate );
+    render();
+};
 
+function render() {
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
-
     textgroup.rotation.x -= 0.01;
     textgroup.rotation.z += 0.008;
+
+    renderer.clear();
     renderer.render( scene, camera );
-};
+}
 
 animate();
