@@ -26,8 +26,8 @@ class Sun {
     set_position(angle) {
         this.angle = angle % 360;
         // Rotate clockwise around the z axis, starting from noon
-        this.light.position.set(-this.distance * Math.sin(angle * Math.PI / 180.0), this.distance * Math.cos(this.angle * Math.PI / 180.0, 0));
-        this.light.visible = (angle < 90 || angle > 270); // Hide the light when it's below the horizon            
+        this.light.position.set(this.distance * Math.sin(angle * Math.PI / 180.0), -this.distance * Math.cos(this.angle * Math.PI / 180.0, 0));
+        this.light.visible = !(angle < 90 || angle > 270); // Hide the light when it's below the horizon            
         this.lightHelper.update();
     }
 

@@ -8,9 +8,22 @@
 
     <body>
         <div class="sidepanel">
-            <p>Controls here</p>
+            <p>
+                Select objects by clicking, move by dragging handles. <br>
+                When selected: <br>
+                <b>R</b> - Toggle rotation <br>
+                <b>Shift</b> - Hold for snapping
+            </p>
             <label for="sun_slider">Sun position</label>
-            <input type="range" id="sun_slider" min="0" max="359" value="0" step="1">
+            <input type="range" id="sun_slider" min="0" max="359" value="180" step="1">
+            <p><input type="button" id="add_cube_btn" value="Add cube"></p>
+
+            <p>
+                Camera Controls: <br>
+                <label for="fov_slider">FOV</label>
+                <input type="range" id="fov_slider" min="10" max="120" value="0" step="1">
+                <output id="fov_display" for="fov_slider">0</output>
+            </p>
         </div>
 
         <canvas id="canvas" width="800" height="600">

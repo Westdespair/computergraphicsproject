@@ -6,7 +6,7 @@
     z-index: 1;
     top: 0;
     color: white;
-    border: 1px solid #ffffff;
+    border: 1px solid #ffffff; /* Temporary for layout */
   }
 
 canvas {
@@ -24,7 +24,7 @@ canvas {
     z-index: 1;
     top: 0;
     color: white;
-    border: 1px solid #ffffff;
+    border: 1px solid #ffffff; /* Temporary for layout */
 }
 
 body {
