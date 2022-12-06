@@ -2,30 +2,32 @@ import * as THREE from 'three';
 import { TransformControls } from 'three/addons/controls/TransformControls.js';
 import { Sun } from '/src/objects/sun.js';
 import { Ground } from '/src/objects/ground.js';
+import { Park } from '/src/objects/park.js';
 import { Cube } from '/src/objects/cube.js';
 
 const sun_position = document.getElementById('sun_slider');
 const add_cube_btn = document.getElementById('add_cube_btn');
 const fov_slider = document.getElementById('fov_slider');
-const canvas = document.getElementById('canvas');
+const main_canvas = document.getElementById('main_canvas');
+const heatmap_canvas = document.getElementById('heatmap_canvas');
 
 const scene = new THREE.Scene();
 
 // Create renderer
-const renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true } );
-renderer.setSize( canvas.clientWidth, canvas.clientHeight );
+const renderer = new THREE.WebGLRenderer( { canvas: main_canvas, antialias: true } );
+renderer.setSize( main_canvas.clientWidth, main_canvas.clientHeight );
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
-
 
 fov_slider.oninput = function(event) {
     document.getElementById('fov_display').value=event.target.value;
     camera.fov = event.target.value;
     camera.updateProjectionMatrix();
 }
-const camera = new THREE.PerspectiveCamera( 75, canvas.clientWidth / canvas.clientHeight, 0.1, 1e6 )
+const camera = new THREE.PerspectiveCamera( 75, main_canvas.clientWidth / main_canvas.clientHeight, 0.1, 1e6 )
 fov_slider.value = camera.fov; fov_slider.dispatchEvent(new Event('input'));
-camera.position.set(0, 2, 5);
+camera.position.set(0, 5, 5);
+camera.lookAt(0, 0, 0);
 
 // Create a group to hold all objects
 const group = new THREE.Group();
@@ -54,7 +56,7 @@ control.deselect = function() {
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-canvas.onmousedown = function(event) {
+main_canvas.onmousedown = function(event) {
     event.preventDefault();
     // possible race condition if dragging not set before this handler runs?
     if (control.dragging) {
@@ -76,8 +78,8 @@ canvas.onmousedown = function(event) {
     } );
     if ( intersected_meshes.length > 0 ) {
         const object = intersected_meshes[0].object;
-        // Avoid selecting the ground
-        if (object != ground.mesh) {
+        // Avoid selecting the ground or park
+        if (object != ground.mesh && object != park.heatmap.mesh) {
             control.select(object);
         }
     }
@@ -123,9 +125,11 @@ document.addEventListener( 'keyup', function(event) {
 );
 
 const sun = new Sun(group);
+sun.disableHelper();
 const ground = new Ground(group, new THREE.Vector3(0, 0, 0), 100, 100, 0x262626);
+const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 2, 5, 0x00ff00, 100, heatmap_canvas);
 
-const global_light = new THREE.AmbientLight( 0xffffff, 0.01 );
+const global_light = new THREE.AmbientLight( 0xffffff, 0.02 );
 scene.add( global_light );
 
 scene.add( group );
@@ -137,9 +141,11 @@ function animate() {
 };
 
 function render() {
-    sun.set_position(sun_position.value);
+    sun.setPosition(sun_position.value);
     renderer.clear();
     renderer.render( scene, camera );
+    
+    park.renderHeatmap( scene );
 }
 
 animate();

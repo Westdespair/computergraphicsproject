@@ -27,6 +27,13 @@ canvas {
     border: 1px solid #ffffff; /* Temporary for layout */
 }
 
+.output canvas {
+    float: left;
+    width: 90%;
+    top: 0;
+    margin: 5%;
+}
+
 body {
     background-color: #000000;
 }

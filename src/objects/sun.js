@@ -16,14 +16,15 @@ class Sun {
         this.light.shadow.mapSize.set(2**16, 2**16);
         this.light.shadow.camera.near = 0.1;
         this.light.shadow.camera.far = 120;
+        this.light.shadow.bias = -0.0001; // Reduce self-shadowing
         this.lightHelper = new THREE.DirectionalLightHelper(this.light, this.diameter);
-        this.set_position(this.angle);
+        this.setPosition(this.angle);
 
         group.add(this.light);
         group.add(this.lightHelper);
     }
 
-    set_position(angle) {
+    setPosition(angle) {
         this.angle = angle % 360;
         // Rotate clockwise around the z axis, starting from noon
         this.light.position.set(this.distance * Math.sin(angle * Math.PI / 180.0), -this.distance * Math.cos(this.angle * Math.PI / 180.0, 0));
@@ -31,11 +32,11 @@ class Sun {
         this.lightHelper.update();
     }
 
-    add_position(angle) {
+    addPosition(angle) {
         this.set_position(this.angle + angle);
     }
 
-    disable_helper() {
+    disableHelper() {
         this.lightHelper.visible = false;
     }
 
