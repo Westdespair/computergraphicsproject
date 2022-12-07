@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { TransformControls } from 'three/addons/controls/TransformControls.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Sun } from '/src/objects/sun.js';
 import { Ground } from '/src/objects/ground.js';
 import { Park } from '/src/objects/park.js';
@@ -8,6 +9,7 @@ import { Cube } from '/src/objects/cube.js';
 const sun_position = document.getElementById('sun_slider');
 const add_cube_btn = document.getElementById('add_cube_btn');
 const fov_slider = document.getElementById('fov_slider');
+const reset_camera_btn = document.getElementById('reset_camera_btn');
 const main_canvas = document.getElementById('main_canvas');
 const heatmap_canvas = document.getElementById('heatmap_canvas');
 
@@ -53,13 +55,21 @@ control.deselect = function() {
     this.enabled = false;
 };
 
+const orbit = new OrbitControls( camera, renderer.domElement );
+orbit.maxDistance = 20;
+orbit.minDistance = 2;
+//orbit.maxPolarAngle = Math.PI / 2; Doesn't keep from panning below the ground
+reset_camera_btn.onclick = function() { orbit.reset(); }
+
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 main_canvas.onmousedown = function(event) {
     event.preventDefault();
+    orbit.enabled = true;
     // possible race condition if dragging not set before this handler runs?
     if (control.dragging) {
+        orbit.enabled = false;
         return;
     }
     // If control is enabled, clicking outside the drag handles will disable it
@@ -79,7 +89,7 @@ main_canvas.onmousedown = function(event) {
     if ( intersected_meshes.length > 0 ) {
         const object = intersected_meshes[0].object;
         // Avoid selecting the ground or park
-        if (object != ground.mesh && object != park.heatmap.mesh) {
+        if (object != ground.mesh && object != park.mesh) {
             control.select(object);
         }
     }
