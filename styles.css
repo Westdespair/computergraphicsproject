@@ -5,6 +5,7 @@
     left: 0;
     top: 0;
     width: 15%;
+    height: 100%;
     z-index: 1;
     color: white;
     border: 1px solid #ffffff; /* Temporary for layout */
@@ -14,23 +15,22 @@
     position: fixed;
     left: 15%;
     top: 0;
-    width: 60%;
+    width: 70%;
+    height: 100%;
 }
 .scene canvas {
     float: left;
-    width: 100%;
-    top: 0;
     border: 1px solid #ffffff;
 }
 
 /* Panel for heatmap output */
 .output {
     position: fixed;
-    left: 75%;
-    height: 100%;
-    width: 15%;
-    z-index: 1;
+    left: 85%;
     top: 0;
+    width: 15%;
+    height: 100%;
+    z-index: 1;
     color: white;
     border: 1px solid #ffffff; /* Temporary for layout */
 }
@@ -38,6 +38,7 @@
 .output canvas {
     float: left;
     width: 90%;
+    height: 90%;
     top: 0;
     margin: 5%;
 }

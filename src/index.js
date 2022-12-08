@@ -18,7 +18,7 @@ const scene = new THREE.Scene();
 
 // Create renderer
 const renderer = new THREE.WebGLRenderer( { canvas: main_canvas, antialias: true } );
-renderer.setSize( main_canvas.clientWidth, main_canvas.clientHeight );
+renderer.setSize( main_canvas.parentElement.clientWidth, main_canvas.parentElement.clientHeight );
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
 
@@ -27,7 +27,7 @@ fov_slider.oninput = function(event) {
     camera.fov = event.target.value;
     camera.updateProjectionMatrix();
 }
-const camera = new THREE.PerspectiveCamera( 75, main_canvas.clientWidth / main_canvas.clientHeight, 0.1, 1e6 )
+const camera = new THREE.PerspectiveCamera( 75, main_canvas.parentElement.clientWidth / main_canvas.parentElement.clientHeight, 0.1, 1e6 )
 fov_slider.value = camera.fov; fov_slider.dispatchEvent(new Event('input'));
 camera.position.set(0, 5, 5);
 camera.lookAt(0, 0, 0);
@@ -139,6 +139,12 @@ document.addEventListener( 'keyup', function(event) {
     }
 }
 );
+
+window.addEventListener( 'resize', function() {
+    camera.aspect = main_canvas.parentElement.clientWidth / main_canvas.parentElement.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( main_canvas.parentElement.clientWidth, main_canvas.parentElement.clientHeight ); 
+});
 
 const sun = new Sun(group);
 sun.disableHelper();
