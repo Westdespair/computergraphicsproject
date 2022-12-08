@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { TransformControls } from 'three/addons/controls/TransformControls.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import Stats from 'three/addons/libs/stats.module.js';
 import { Sun } from '/src/objects/sun.js';
 import { Ground } from '/src/objects/ground.js';
 import { Park } from '/src/objects/park.js';
@@ -60,6 +61,11 @@ orbit.maxDistance = 20;
 orbit.minDistance = 2;
 //orbit.maxPolarAngle = Math.PI / 2; Doesn't keep from panning below the ground
 reset_camera_btn.onclick = function() { orbit.reset(); }
+
+const stats = new Stats();
+stats.dom.style.cssText = "position: fixed; cursor: pointer; opacity: 0.9; z-index: 10000;"; // Fix position on top of main canvas
+main_canvas.parentNode.appendChild( stats.dom );
+
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -148,6 +154,7 @@ scene.add( control );
 function animate() {
     requestAnimationFrame( animate );
     render();
+    stats.update();
 };
 
 function render() {

@@ -1,24 +1,32 @@
 /* Sidepanel with controls */
 .sidepanel {
-    float: left;
+    position: fixed;
     height: 100%;
+    left: 0;
+    top: 0;
     width: 15%;
     z-index: 1;
-    top: 0;
     color: white;
     border: 1px solid #ffffff; /* Temporary for layout */
   }
 
-canvas {
-    float: left;
+.scene {
+    position: fixed;
+    left: 15%;
+    top: 0;
     width: 60%;
+}
+.scene canvas {
+    float: left;
+    width: 100%;
     top: 0;
     border: 1px solid #ffffff;
 }
 
 /* Panel for heatmap output */
 .output {
-    float: left;
+    position: fixed;
+    left: 75%;
     height: 100%;
     width: 15%;
     z-index: 1;
