@@ -84,8 +84,8 @@ main_canvas.onmousedown = function(event) {
         return;
     }
     // Get mouse position in camera image plane, raycast to find intersecting objects
-    mouse.x = ( (event.clientX - renderer.domElement.offsetLeft) / renderer.domElement.clientWidth ) * 2 - 1;
-    mouse.y = -( (event.clientY - renderer.domElement.offsetTop) / renderer.domElement.clientHeight ) * 2 + 1;
+    mouse.x = ( (event.clientX - renderer.domElement.parentElement.offsetLeft) / renderer.domElement.clientWidth ) * 2 - 1;
+    mouse.y = -( (event.clientY - renderer.domElement.parentElement.offsetTop) / renderer.domElement.clientHeight ) * 2 + 1;
     raycaster.setFromCamera( mouse, camera );
     const intersects = raycaster.intersectObjects( group.children );
     // Get only meshes
