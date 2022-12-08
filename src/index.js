@@ -137,7 +137,7 @@ document.addEventListener( 'keyup', function(event) {
 const sun = new Sun(group);
 sun.disableHelper();
 const ground = new Ground(group, new THREE.Vector3(0, 0, 0), 100, 100, 0x262626);
-const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 2, 5, 0x00ff00, 100, heatmap_canvas);
+const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 2, 5, 0x00ff00);
 
 const global_light = new THREE.AmbientLight( 0xffffff, 0.02 );
 scene.add( global_light );
@@ -154,8 +154,6 @@ function render() {
     sun.setPosition(sun_position.value);
     renderer.clear();
     renderer.render( scene, camera );
-    
-    park.renderHeatmap( scene );
 }
 
 animate();
