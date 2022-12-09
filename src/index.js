@@ -7,6 +7,7 @@ import { Ground } from '/src/objects/ground.js';
 import { Park } from '/src/objects/park.js';
 import { Cube } from '/src/objects/cube.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {BufferGeometry} from "three";
 
 
 const sun_position = document.getElementById('sun_slider');
@@ -116,28 +117,25 @@ add_house_btn.onclick = function() {
     // Randomize x, z position and color
     const pos = new THREE.Vector3(Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2);
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load('res/objects/enebolig.gltf', (gltf) => {
+    gltfLoader.load('res/objects/enebolig1.gltf', (gltf) => {
         const root = gltf.scene;
-        gltf.scene.scale.set(0.25*gltf.scene.scale.x, 0.25*gltf.scene.scale.y, 0.25 * gltf.scene.scale.z)
-        scene.add(root);
-        console.log(dumpObject(root).join('\n'));
+        gltf.scene.children[0].scale.set(0.25*gltf.scene.children[0].scale.x, 0.25*gltf.scene.children[0].scale.y, 0.25*gltf.scene.children[0].scale.z);
+        gltf.scene.position.set(pos);
+        group.add(gltf.scene.children[0]);
     })
 }
 
 add_skyscraper_btn.onclick = function() {
     // Randomize x, z position and color
-    const pos = new THREE.Vector3( Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2 );
-    const Earth = () => {
-        const [model, setModel] = useState();
-        useEffect(() => {
-            new GLTFLoader().load("res/objects/enebolig.gltf", (model) => {
-                model.scene.scale.set(0.1, 0.1, 0.1);
-                setModel(model);
-            });
-        });
-
-    };
-};
+    const pos = new THREE.Vector3(Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2);
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load('res/objects/skyscraper1.gltf', (gltf) => {
+        const root = gltf.scene;
+        gltf.scene.children[0].scale.set(0.25*gltf.scene.children[0].scale.x, 0.25*gltf.scene.children[0].scale.y, 0.25*gltf.scene.children[0].scale.z);
+        gltf.scene.position.set(pos);
+        group.add(gltf.scene.children[0]);
+    })
+}
 
 
 // Key events
