@@ -6,6 +6,8 @@ import { Sun } from '/src/objects/sun.js';
 import { Ground } from '/src/objects/ground.js';
 import { Park } from '/src/objects/park.js';
 import { Cube } from '/src/objects/cube.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+
 
 const sun_position = document.getElementById('sun_slider');
 const add_cube_btn = document.getElementById('add_cube_btn');
@@ -108,6 +110,35 @@ add_cube_btn.onclick = function() {
     const color = Math.random() * 0xffffff;
     const cube = new Cube(group, pos, new THREE.Vector3(1, 1, 1), color);
 };
+
+
+add_house_btn.onclick = function() {
+    // Randomize x, z position and color
+    const pos = new THREE.Vector3(Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2);
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load('res/objects/enebolig.gltf', (gltf) => {
+        const root = gltf.scene;
+        gltf.scene.scale.set(0.25*gltf.scene.scale.x, 0.25*gltf.scene.scale.y, 0.25 * gltf.scene.scale.z)
+        scene.add(root);
+        console.log(dumpObject(root).join('\n'));
+    })
+}
+
+add_skyscraper_btn.onclick = function() {
+    // Randomize x, z position and color
+    const pos = new THREE.Vector3( Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2 );
+    const Earth = () => {
+        const [model, setModel] = useState();
+        useEffect(() => {
+            new GLTFLoader().load("res/objects/enebolig.gltf", (model) => {
+                model.scene.scale.set(0.1, 0.1, 0.1);
+                setModel(model);
+            });
+        });
+
+    };
+};
+
 
 // Key events
 document.addEventListener('keydown', function(event) {
