@@ -155,10 +155,10 @@ addButton.onclick = function() {
 
 function add_cube() {
     // Randomize x, z position and color
-    const pos = new THREE.Vector3( Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2 );
+    const pos = new THREE.Vector3( Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2 );   
     const color = Math.random() * 0xffffff;
     const cube = new Cube(group, pos, new THREE.Vector3(1, 1, 1), color);
-}
+};
 
 
 
@@ -215,11 +215,11 @@ window.addEventListener( 'resize', function() {
 });
 
 const sun = new Sun(group);
-sun.disableHelper();
+sun.disableHelper(); 
 const ground = new Ground(group, new THREE.Vector3(0, 0, 0), 1000, 1000, 0x262626);
-const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 20, 20, 0x00ff00);
+const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 20, 20, 0x0e6e28);
 
-const global_light = new THREE.AmbientLight( 0xffffff, 0.02 );
+const global_light = new THREE.AmbientLight( 0xffffff, 0.2 );
 scene.add( global_light );
 
 scene.add( group );
