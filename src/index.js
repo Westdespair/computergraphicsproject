@@ -16,6 +16,11 @@ const fov_slider = document.getElementById('fov_slider');
 const reset_camera_btn = document.getElementById('reset_camera_btn');
 const main_canvas = document.getElementById('main_canvas');
 const heatmap_canvas = document.getElementById('heatmap_canvas');
+const addButton = document.getElementById("addBtn");
+
+
+
+
 
 const scene = new THREE.Scene();
 
@@ -104,35 +109,69 @@ main_canvas.onmousedown = function(event) {
     }
 };
 
-// Logic to create and destroy cubes
-add_cube_btn.onclick = function() {
-    // Randomize x, z position and color
-    const pos = new THREE.Vector3( Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2 );   
-    const color = Math.random() * 0xffffff;
-    const cube = new Cube(group, pos, new THREE.Vector3(1, 1, 1), color);
-};
+
+addButton.onclick = function() {
+    const name = (shape.value)
+
+    switch(name) {
+        case "Cube":
+            add_cube()
+        break;
+
+        case "House":
+            add_gltf("enebolig1")
+        break;
+
+        case "Tree":
+            add_gltf("tree")
+            break;
+
+        case "Skyscraper":
+            add_gltf("skyscraper1")
+            break;
+
+        case "Bush":
+            add_gltf("bush")
+            break;
+
+        case "Playground":
+            add_gltf("swingset")
+            break;
+
+        case "Picnicbench":
+            add_gltf("picnicbench")
+            break;
+
+        case "Parkbench":
+            add_gltf("parkbench")
+            break;
+
+    }
 
 
-add_house_btn.onclick = function() {
-    // Randomize x, z position and color
-    const pos = new THREE.Vector3(Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2);
-    const gltfLoader = new GLTFLoader();
-    gltfLoader.load('res/objects/enebolig1.gltf', (gltf) => {
-        const root = gltf.scene;
-        gltf.scene.children[0].scale.set(1*gltf.scene.children[0].scale.x, 1*gltf.scene.children[0].scale.y, 10*gltf.scene.children[0].scale.z);
-        gltf.scene.position.set(pos);
-        group.add(gltf.scene.children[0]);
-    })
+
 }
 
-add_skyscraper_btn.onclick = function() {
+
+function add_cube() {
+    // Randomize x, z position and color
+    const pos = new THREE.Vector3( Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2 );
+    const color = Math.random() * 0xffffff;
+    const cube = new Cube(group, pos, new THREE.Vector3(1, 1, 1), color);
+}
+
+
+
+function add_gltf(object) {
     // Randomize x, z position and color
     const pos = new THREE.Vector3(Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2);
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load('res/objects/skyscraper1.gltf', (gltf) => {
+    gltfLoader.load('res/objects/'+object+'.gltf', (gltf) => {
         const root = gltf.scene;
         gltf.scene.children[0].scale.set(1*gltf.scene.children[0].scale.x,1*gltf.scene.children[0].scale.y, 1*gltf.scene.children[0].scale.z);
         gltf.scene.position.set(pos);
+        gltf.scene.children[0].recieveShadow = true;
+        gltf.scene.children[0].castShadow = true;
         group.add(gltf.scene.children[0]);
     })
 }
