@@ -13,7 +13,7 @@ class Sun {
         
         this.light = new THREE.DirectionalLight(0xffffff, 1, 0, 0);
         this.light.castShadow = true;
-        this.light.shadow.mapSize.set(2**16, 2**16);
+        this.light.shadow.mapSize.set(2**13, 2**13);
         this.light.shadow.camera.near = 0.1;
         this.light.shadow.camera.far = 120;
         this.light.shadow.bias = -0.0001; // Reduce self-shadowing
@@ -26,9 +26,9 @@ class Sun {
 
     setPosition(angle) {
         this.angle = angle % 360;
-        // Rotate clockwise around the z axis, starting from noon
-        this.light.position.set(this.distance * Math.sin(angle * Math.PI / 180.0), -this.distance * Math.cos(this.angle * Math.PI / 180.0, 0));
-        this.light.visible = !(angle < 90 || angle > 270); // Hide the light when it's below the horizon            
+        //Rotate clockwise around the z axis, starting from noon
+        this.light.position.set(this.distance * Math.sin(this.angle * Math.PI / 180.0), -this.distance * Math.cos(this.angle * Math.PI / 180.0, 0));
+        this.light.visible = !(this.angle < 90 || this.angle > 270); // Hide the light when it's below the horizon            
         this.lightHelper.update();
     }
 

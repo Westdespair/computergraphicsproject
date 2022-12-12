@@ -17,8 +17,29 @@
 
             </p>
             <label for="sun_slider">Sun position</label>
+
             <input type="range" id="sun_slider" min="0" max="359" value="180" step="1">
-            <p><input type="button" id="add_cube_btn" value="Add cube"></p>
+
+
+            <p>
+                <label for="shape">Shape:</label>
+            <select name="shape" id="shape">
+                <option value="Cube">Cube</option>
+                <option value="House">House</option>
+                <option value="Skyscraper">Skyscraper</option>
+                <option value="Bush">Bush</option>
+                <option value="Tree">Tree</option>
+                <option value="Playground">Playground</option>
+                <option value="Picnicbench">Picnic Bench</option>
+                <option value="Parkbench">Park Bench</option>
+            </select>
+
+
+
+            <button id="addBtn">Add object.</button>
+
+            </p>
+
 
             <p>
                 <b>Camera Controls:</b> <br>
@@ -28,10 +49,12 @@
                 <button id="reset_camera_btn">Reset cam. pos.</button>
             </p>
         </div>
-
-        <canvas id="main_canvas" width="800" height="600">
-            Please use a browser that supports "canvas"
-        </canvas>
+        <div class="scene">
+            <canvas id="main_canvas" width="800" height="600">
+                Please use a browser that supports "canvas"
+            </canvas>
+        </div>
+        
 
         <div class="output">
             Park lighting: <br>
@@ -47,9 +70,8 @@
     <script type="importmap">
     {
         "imports": {
-        "three": "https://unpkg.com/three@0.147.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.147.0/examples/jsm/",
-        "three/fonts/": "https://unpkg.com/three@0.147.0/examples/fonts/"
+        "three": "./node_modules/three/build/three.module.js",
+        "three/addons/": "./node_modules/three/examples/jsm/"
         }
     }
     </script>

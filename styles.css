@@ -1,28 +1,36 @@
 /* Sidepanel with controls */
 .sidepanel {
-    float: left;
+    position: fixed;
     height: 100%;
-    width: 15%;
-    z-index: 1;
+    left: 0;
     top: 0;
+    width: 15%;
+    height: 100%;
+    z-index: 1;
     color: white;
     border: 1px solid #ffffff; /* Temporary for layout */
   }
 
-canvas {
-    float: left;
-    width: 60%;
+.scene {
+    position: fixed;
+    left: 15%;
     top: 0;
+    width: 70%;
+    height: 100%;
+}
+.scene canvas {
+    float: left;
     border: 1px solid #ffffff;
 }
 
 /* Panel for heatmap output */
 .output {
-    float: left;
-    height: 100%;
-    width: 15%;
-    z-index: 1;
+    position: fixed;
+    left: 85%;
     top: 0;
+    width: 15%;
+    height: 100%;
+    z-index: 1;
     color: white;
     border: 1px solid #ffffff; /* Temporary for layout */
 }
@@ -30,6 +38,7 @@ canvas {
 .output canvas {
     float: left;
     width: 90%;
+    height: 90%;
     top: 0;
     margin: 5%;
 }
