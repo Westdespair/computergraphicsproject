@@ -60,7 +60,7 @@ control.deselect = function() {
 };
 
 const orbit = new OrbitControls( camera, renderer.domElement );
-orbit.maxDistance = 20;
+orbit.maxDistance = 100;
 orbit.minDistance = 2;
 //orbit.maxPolarAngle = Math.PI / 2; Doesn't keep from panning below the ground
 reset_camera_btn.onclick = function() { orbit.reset(); }
@@ -119,7 +119,7 @@ add_house_btn.onclick = function() {
     const gltfLoader = new GLTFLoader();
     gltfLoader.load('res/objects/enebolig1.gltf', (gltf) => {
         const root = gltf.scene;
-        gltf.scene.children[0].scale.set(0.25*gltf.scene.children[0].scale.x, 0.25*gltf.scene.children[0].scale.y, 0.25*gltf.scene.children[0].scale.z);
+        gltf.scene.children[0].scale.set(1*gltf.scene.children[0].scale.x, 1*gltf.scene.children[0].scale.y, 10*gltf.scene.children[0].scale.z);
         gltf.scene.position.set(pos);
         group.add(gltf.scene.children[0]);
     })
@@ -131,7 +131,7 @@ add_skyscraper_btn.onclick = function() {
     const gltfLoader = new GLTFLoader();
     gltfLoader.load('res/objects/skyscraper1.gltf', (gltf) => {
         const root = gltf.scene;
-        gltf.scene.children[0].scale.set(0.25*gltf.scene.children[0].scale.x, 0.25*gltf.scene.children[0].scale.y, 0.25*gltf.scene.children[0].scale.z);
+        gltf.scene.children[0].scale.set(1*gltf.scene.children[0].scale.x,1*gltf.scene.children[0].scale.y, 1*gltf.scene.children[0].scale.z);
         gltf.scene.position.set(pos);
         group.add(gltf.scene.children[0]);
     })
@@ -177,8 +177,8 @@ window.addEventListener( 'resize', function() {
 
 const sun = new Sun(group);
 sun.disableHelper();
-const ground = new Ground(group, new THREE.Vector3(0, 0, 0), 100, 100, 0x262626);
-const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 2, 5, 0x00ff00);
+const ground = new Ground(group, new THREE.Vector3(0, 0, 0), 1000, 1000, 0x262626);
+const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 20, 20, 0x00ff00);
 
 const global_light = new THREE.AmbientLight( 0xffffff, 0.02 );
 scene.add( global_light );
