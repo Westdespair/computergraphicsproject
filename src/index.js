@@ -146,6 +146,9 @@ addButton.onclick = function() {
             add_gltf("parkbench")
             break;
 
+        case "Landmark":
+            add_gltf("landmark")
+            break;
     }
 
 
