@@ -29,6 +29,7 @@ const renderer = new THREE.WebGLRenderer( { canvas: main_canvas, antialias: true
 renderer.setSize( main_canvas.parentElement.clientWidth, main_canvas.parentElement.clientHeight );
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.setClearColor("#87CEEB", 1);
 
 fov_slider.oninput = function(event) {
     document.getElementById('fov_display').value=event.target.value;
