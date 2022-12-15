@@ -38,7 +38,7 @@ fov_slider.oninput = function(event) {
 }
 const camera = new THREE.PerspectiveCamera( 75, main_canvas.parentElement.clientWidth / main_canvas.parentElement.clientHeight, 0.1, 1e6 )
 fov_slider.value = camera.fov; fov_slider.dispatchEvent(new Event('input'));
-camera.position.set(0, 5, 5);
+camera.position.set(0, 50, 50);
 camera.lookAt(0, 0, 0);
 
 // Create a group to hold all objects

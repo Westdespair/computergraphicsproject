@@ -16,7 +16,7 @@ class Sun {
         this.light.castShadow = true;
         this.light.shadow.mapSize.set(2**13, 2**13);
         this.light.shadow.camera.near = 0.1;
-        this.light.shadow.camera.far = 150;
+        this.light.shadow.camera.far = 250;
         this.light.shadow.camera.left = -this.distance;
         this.light.shadow.camera.right = this.distance;
         this.light.shadow.camera.top = this.distance;

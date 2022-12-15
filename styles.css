@@ -8,7 +8,7 @@
     height: 100%;
     z-index: 1;
     color: white;
-    border: 1px solid #ffffff; /* Temporary for layout */
+    /* border: 1px solid #ffffff; Temporary for layout */
   }
 
 .scene {
@@ -20,7 +20,7 @@
 }
 .scene canvas {
     float: left;
-    border: 1px solid #ffffff;
+    /* border: 1px solid #ffffff; */
 }
 
 /* Panel for heatmap output */
@@ -32,10 +32,17 @@
     height: 100%;
     z-index: 1;
     color: white;
-    border: 1px solid #ffffff; /* Temporary for layout */
+    /* border: 1px solid #ffffff; Temporary for layout */
 }
 
 .output canvas {
+    float: left;
+    width : 90%;
+    top: 0;
+    margin: 5%;
+}
+
+.output progress {
     float: left;
     width : 90%;
     top: 0;
