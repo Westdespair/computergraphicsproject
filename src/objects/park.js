@@ -15,9 +15,11 @@ class Park {
         this.mesh.position.set(pos.x, pos.y, pos.z);
         this.mesh.castShadow = true;
         this.mesh.receiveShadow = true;
+        this.mesh.renderOrder = 1;
 
         group.add(this.mesh);
     }
+
 
     // Begin new heatmap render
     initRenderHeatmap(group, sun, heatmap_canvas, n_samples, progress_bar) {
@@ -50,6 +52,7 @@ class Park {
     }
 
     // Take one step of updating the sun position and sampling the park light intensity
+    // After init has been called, this has to be called repeatedly to complete the calculation
     stepRenderHeatmap() {
         // Only run if we have not finished
         if(this.hm_samples >= this.hm_n_samples || this.hm_samples == null) {
@@ -81,7 +84,7 @@ class Park {
         }
         this.hm_samples += 1;
         // Update on current progress
-        console.log("Sample " + this.hm_samples + " of " + this.hm_n_samples);
+        //console.log("Sample " + this.hm_samples + " of " + this.hm_n_samples);
         this.hm_progress_bar.value = this.hm_samples / this.hm_n_samples;
 
         // Only draw the heatmap if we have finished

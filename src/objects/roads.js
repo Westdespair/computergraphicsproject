@@ -23,6 +23,7 @@ class Road {
         this.mesh.position.set(pos.x, pos.y, pos.z);
         this.mesh.castShadow = true;
         this.mesh.receiveShadow = true;
+        this.mesh.renderOrder = 1;
         group.add(this.mesh);
 
 
