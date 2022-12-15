@@ -147,9 +147,6 @@ addButton.onclick = function() {
             add_gltf("landmark")
             break;
     }
-
-
-
 }
 
 // Reset heatmap calculation
@@ -166,10 +163,10 @@ function add_cube() {
     cube.mesh.selectable = true;
 };
 
-
-
+// Reference to animated objects
 let car1;
 let truck1;
+
 function add_gltf(object, scalex, scaley, scalez, posx, posy, posz) {
     if (scalex === undefined) {
         scalex = 1;
@@ -194,8 +191,10 @@ function add_gltf(object, scalex, scaley, scalez, posx, posy, posz) {
         gltf.scene.children[0].position.set(posx, posy, posz);
         gltf.scene.children[0].recieveShadow = true;
         gltf.scene.children[0].castShadow = true;
-        gltf.scene.children[0].selectable = true;
+        gltf.scene.children[0].selectable = true; // Needed to select with mouse
         group.add(gltf.scene.children[0]);
+
+        // We need to keep track of the animated objects, store
         if (object === "car") {
             car1 = group.children[group.children.length-1];
             car1.selectable = false;
@@ -250,7 +249,7 @@ sun.disableHelper();
 
 let ground_length = 1000;
 let ground_width = 1000;
-const ground = new Ground(group, new THREE.Vector3(0, 0, 0), 1000, 1000, 0x262626);
+const ground = new Ground(group, new THREE.Vector3(0, 0, 0), ground_width, ground_length, 0x262626);
 const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 20, 20, 0x0e6e28);
 
 
@@ -271,10 +270,14 @@ add_gltf("car", 5, 5, 5, 50, 0, 200);
 add_gltf("truck", 5, 5, 5, -50, 0, -200);
 
 function updateCars() {
+    // Check that the objects are loaded
+    if (car1 === undefined || truck1 === undefined) {
+        return;
+    }
+    // Animate
     car1.position.x -= 1;
-
     truck1.position.x -= 1;
-
+    // Wrap around map
     if (car1.position.x < -500) {
         car1.position.x = 500;
     }
@@ -283,13 +286,15 @@ function updateCars() {
     }
 }
 
+// Add all obejcts to renderable scene
 scene.add( group );
 scene.add( control );
 
+// Animation loop
 function animate() {
     requestAnimationFrame( animate );
     render();
-    stats.update();
+    stats.update(); // FPS counter
 };
 
 function render() {
