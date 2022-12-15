@@ -7,7 +7,6 @@ import { Ground } from '/src/objects/ground.js';
 import { Park } from '/src/objects/park.js';
 import { Cube } from '/src/objects/cube.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {BufferGeometry} from "three";
 import {Road} from "./objects/roads.js";
 
 const sun_position = document.getElementById('sun_slider');
@@ -96,17 +95,11 @@ main_canvas.onmousedown = function(event) {
     mouse.x = ( (event.clientX - renderer.domElement.parentElement.offsetLeft) / renderer.domElement.clientWidth ) * 2 - 1;
     mouse.y = -( (event.clientY - renderer.domElement.parentElement.offsetTop) / renderer.domElement.clientHeight ) * 2 + 1;
     raycaster.setFromCamera( mouse, camera );
-    const intersects = raycaster.intersectObjects( group.children );
-    // Get only meshes
-    const intersected_meshes = intersects.filter( function( intersect ) {
-        return intersect.object.type === 'Mesh';
-    } );
-    if ( intersected_meshes.length > 0 ) {
-        const object = intersected_meshes[0].object;
-        // Avoid selecting the ground or park
-        if (object !== ground.mesh && object !== park.mesh) {
-            control.select(object);
-        }
+    const selectable = group.children.filter( function( object ) { return object.selectable; } ); // Filter out only objects with selectable property
+    const intersects = raycaster.intersectObjects(selectable); 
+    if ( intersects.length > 0 ) {
+        const object = intersects[0].object;
+        control.select(object);
     }
 };
 
@@ -170,6 +163,7 @@ function add_cube() {
     const pos = new THREE.Vector3( Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2 );   
     const color = Math.random() * 0xffffff;
     const cube = new Cube(group, pos, new THREE.Vector3(1, 1, 1), color);
+    cube.mesh.selectable = true;
 };
 
 
@@ -200,12 +194,14 @@ function add_gltf(object, scalex, scaley, scalez, posx, posy, posz) {
         gltf.scene.children[0].position.set(posx, posy, posz);
         gltf.scene.children[0].recieveShadow = true;
         gltf.scene.children[0].castShadow = true;
+        gltf.scene.children[0].selectable = true;
         group.add(gltf.scene.children[0]);
         if (object === "car") {
             car1 = group.children[group.children.length-1];
+            car1.selectable = false;
         } else if (object === "truck") {
             truck1 = group.children[group.children.length-1];
-
+            truck1.selectable = false;
         }
     })
 
