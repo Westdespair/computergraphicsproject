@@ -96,7 +96,7 @@ main_canvas.onmousedown = function(event) {
     mouse.y = -( (event.clientY - renderer.domElement.parentElement.offsetTop) / renderer.domElement.clientHeight ) * 2 + 1;
     raycaster.setFromCamera( mouse, camera );
     const selectable = group.children.filter( function( object ) { return object.selectable; } ); // Filter out only objects with selectable property
-    const intersects = raycaster.intersectObjects(selectable); 
+    const intersects = raycaster.intersectObjects(selectable);
     if ( intersects.length > 0 ) {
         const object = intersects[0].object;
         control.select(object);
@@ -250,7 +250,7 @@ sun.disableHelper();
 let ground_length = 1000;
 let ground_width = 1000;
 const ground = new Ground(group, new THREE.Vector3(0, 0, 0), ground_width, ground_length, 0x262626);
-const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 20, 20, 0x0e6e28);
+const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 80, 160, 0x0e6e28);
 
 
 for (let i = -400; i < 400; i = i + 200) {
@@ -276,6 +276,7 @@ function updateCars() {
     }
     // Animate
     car1.position.x -= 1;
+
     truck1.position.x -= 1;
     // Wrap around map
     if (car1.position.x < -500) {
@@ -289,6 +290,38 @@ function updateCars() {
 // Add all obejcts to renderable scene
 scene.add( group );
 scene.add( control );
+
+
+
+
+add_gltf("skyscraper1", 3, 0.8, 3, 0, 0, 240);
+add_gltf("skyscraper1", 3, 1.2, 3, 30, 0, 240);
+add_gltf("skyscraper1", 3, 1, 3, 60, 0, 240);
+add_gltf("skyscraper1", 3, 1.1, 3, 90, 0, 240);
+add_gltf("skyscraper1", 3, 0.9, 3, 120, 0, 240);
+add_gltf("skyscraper1", 3, 1, 3, 150, 0, 240);
+add_gltf("skyscraper1", 3, 1.3, 3, 240, 0, 240);
+add_gltf("skyscraper1", 3, 1, 3, -30, 0, 240);
+add_gltf("skyscraper1", 3, 1.1, 3, -60, 0, 240);
+add_gltf("skyscraper1", 3, 0.8, 3, -90, 0, 240);
+add_gltf("skyscraper1", 3, 1.5, 3, -120, 0, 240);
+add_gltf("skyscraper1", 3, 1.3, 3, -150, 0, 240);
+add_gltf("skyscraper1", 3, 1, 3, -240, 0, 240);
+add_gltf("skyscraper1", 3, 1.3, 3, -270, 0, 240);
+
+
+add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 150);
+add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 120);
+add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 90);
+add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 60);
+add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 30);
+add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 0);
+add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, -30);
+
+
+
+
+
 
 // Animation loop
 function animate() {
