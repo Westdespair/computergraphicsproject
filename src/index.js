@@ -10,7 +10,6 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {Road} from "./objects/roads.js";
 
 const sun_position = document.getElementById('sun_slider');
-const add_cube_btn = document.getElementById('add_cube_btn');
 const fov_slider = document.getElementById('fov_slider');
 const reset_camera_btn = document.getElementById('reset_camera_btn');
 const main_canvas = document.getElementById('main_canvas');
@@ -19,6 +18,7 @@ const addButton = document.getElementById("addBtn");
 const heatmapSamples = document.getElementById("calc_samples");
 const heatmapProgress = document.getElementById("calc_progress");
 const heatmapCalcButton = document.getElementById("calc_heatmap_btn");
+const heatmapCanvasWidth = document.getElementById("calc_canv_width");
 
 
 const scene = new THREE.Scene();
@@ -37,7 +37,7 @@ fov_slider.oninput = function(event) {
 }
 const camera = new THREE.PerspectiveCamera( 75, main_canvas.parentElement.clientWidth / main_canvas.parentElement.clientHeight, 0.1, 1e6 )
 fov_slider.value = camera.fov; fov_slider.dispatchEvent(new Event('input'));
-camera.position.set(0, 50, 50);
+camera.position.set(0, 300, 300);
 camera.lookAt(0, 0, 0);
 
 // Create a group to hold all objects
@@ -65,9 +65,8 @@ control.deselect = function() {
 };
 
 const orbit = new OrbitControls( camera, renderer.domElement );
-orbit.maxDistance = 100;
+orbit.maxDistance = 800;
 orbit.minDistance = 2;
-//orbit.maxPolarAngle = Math.PI / 2; Doesn't keep from panning below the ground
 reset_camera_btn.onclick = function() { orbit.reset(); }
 
 const stats = new Stats();
@@ -154,6 +153,11 @@ heatmapCalcButton.onclick = function() {
     park.initRenderHeatmap(group, sun, heatmap_canvas, heatmapSamples.value, heatmapProgress);
 }
 
+heatmapCanvasWidth.onchange = function() {
+    heatmap_canvas.width = heatmapCanvasWidth.value;
+    console.log(heatmap_canvas.width);
+}
+
 
 function add_cube() {
     // Randomize x, z position and color
@@ -217,7 +221,7 @@ document.addEventListener('keydown', function(event) {
     } else if (event.key === "Escape") {
         control.deselect();
     } else if (event.key === "Shift") {
-        control.setTranslationSnap(0.5);
+        control.setTranslationSnap(2);
         control.setRotationSnap(THREE.MathUtils.degToRad(15));
     } else if (event.key.toLowerCase() === "r") {
         if (control.mode === "rotate") {

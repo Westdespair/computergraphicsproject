@@ -10,14 +10,18 @@
         <div class="sidepanel">
             <p>
                 <h3>Instructions:</h3> <br>
-                Select objects by clicking, move by dragging handles. <br>
-                When selected: <br>
+                <b>Left click and drag</b> - Rotate camera <br>
+                <b>Right click and drag</b> - Pan camera <br>
+                <b>Scroll</b> - Zoom camera <br>
+                <b>Shift</b> - Hold to swap rotate and pan buttons <br>
+                <br>
+                Select objects by clicking, move them by dragging handles</b><br>
+                <b>When object is selected:</b> <br>
                 <b>R</b> - Toggle rotation/translation <br>
                 <b>Shift</b> - Hold for snapping <br>
                 <b>Delete</b> - Remove selected object <br>
-
             </p>
-            <label for="sun_slider">Sun position E->W</label>
+            <label for="sun_slider">Sun position: from E - > W</label>
 
             <input type="range" id="sun_slider" min="10" max="170" value="90" step="1">
 
@@ -48,7 +52,7 @@
                 <label for="fov_slider">FOV</label>
                 <input type="range" id="fov_slider" min="10" max="120" value="0" step="1">
                 <output id="fov_display" for="fov_slider">0</output> 
-                <button id="reset_camera_btn">Reset cam. pos.</button>
+                <button id="reset_camera_btn">Reset camera position</button>
             </p>
         </div>
         <div class="scene">
@@ -60,7 +64,7 @@
 
         <div class="output">
             <h3>Park lighting:</h3> <br>
-            <canvas id="heatmap_canvas" width="40" height="20">
+            <canvas id="heatmap_canvas" width="50" height="20">
                 Please use a browser that supports "canvas"
             </canvas>
             
@@ -68,6 +72,10 @@
             <br>
             <label for="calc_samples"># samples for sun position:</label>
             <input id="calc_samples" type="number" value="100" min="20" max="300" step="1"> <br>
+            <br>
+            <label for="calc_canv_width">Heatmap width (px):</label>
+            <input id="calc_canv_width" type="number" value="50" min="10" max="800" step="1"> <br>
+            Large values are slow, beware!<br>
             <br>
             <label for="calc_progress"><b>Calculation progress:</b></label>
             <progress id="calc_progress" value="0" max="1"> 0% </progress>

@@ -5,7 +5,7 @@ class Sun {
         let distance_to_sun = 150e6; // km
         let sun_radius = 695700; // km
         this.sun_angular_radius = Math.atan(sun_radius / distance_to_sun);
-        this.distance = 100; // m
+        this.distance = 600; // m
         this.diameter = 2 * this.distance * Math.tan(this.sun_angular_radius);
 
         // Fixed 10 degrees towards south
@@ -16,7 +16,7 @@ class Sun {
         this.light.castShadow = true;
         this.light.shadow.mapSize.set(2**13, 2**13);
         this.light.shadow.camera.near = 0.1;
-        this.light.shadow.camera.far = 250;
+        this.light.shadow.camera.far = 1200;
         this.light.shadow.camera.left = -this.distance;
         this.light.shadow.camera.right = this.distance;
         this.light.shadow.camera.top = this.distance;
