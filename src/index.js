@@ -8,6 +8,7 @@ import { Park } from '/src/objects/park.js';
 import { Cube } from '/src/objects/cube.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {Road} from "./objects/roads.js";
+import {getDefaultObjects} from "./objects/default_scene.js";
 
 const sun_position = document.getElementById('sun_slider');
 const fov_slider = document.getElementById('fov_slider');
@@ -290,113 +291,15 @@ function updateCars() {
     }
 }
 
+// Populate with default scene as defined in src/objects/default_scene.js
+const ob = getDefaultObjects()
+for (const [key, params] of ob.entries()) {
+    add_gltf(params[0], params[1], params[2], params[3], params[4], params[5], params[6]);
+};
+
 // Add all obejcts to renderable scene
 scene.add( group );
 scene.add( control );
-
-
-add_gltf("landmark", 3, 3, 3, 0, 0, -120);
-
-add_gltf("tree", 2,3,2, 30, 0, -60);
-add_gltf("tree", 2,3.5,2, 30, 0, -70);
-add_gltf("tree", 2,4,2, 30, 0, -80);
-add_gltf("tree", 2,4,2, 30, 0, -90);
-add_gltf("tree", 2,3.5,2, 30, 0, -100);
-add_gltf("tree", 2,3,2, 30, 0, -110);
-add_gltf("tree", 2,3,2, -30, 0, -60);
-add_gltf("tree", 2,3.5,2, -30, 0, -70);
-add_gltf("tree", 2,4,2, -30, 0, -80);
-add_gltf("tree", 2,4,2, -30, 0, -90);
-add_gltf("tree", 2,3.5,2, -30, 0, -100);
-add_gltf("tree", 2,3,2, -30, 0, -110);
-
-add_gltf("swingset", 3,3,3, 100,0,120)
-add_gltf("swingset", 3,3,3, 100,0,90)
-add_gltf("swingset", 3,3,3, 100,0,50)
-
-add_gltf("parkbench", 3,3,3, -10,0,-100)
-add_gltf("parkbench", 3,3,3, 10,0,-100)
-
-add_gltf("picnicbench", 3,3,3, 0,0,0)
-add_gltf("picnicbench", 3,3,3, 0,0,-30)
-
-
-
-add_gltf("bush", 3,3,3, 100,0,35)
-add_gltf("bush", 3,3,3, 100,0,30)
-add_gltf("bush", 3,3,3, 100,0,25)
-add_gltf("bush", 3,3,3, 100,0,20)
-add_gltf("bush", 3,3,3, 95,0,35)
-add_gltf("bush", 3,3,3, 95,0,30)
-add_gltf("bush", 3,3,3, 95,0,25)
-add_gltf("bush", 3,3,3, 95,0,20)
-
-
-add_gltf("bush", 3,3,3, -50,0,35)
-add_gltf("bush", 3,3,3, -80,0,30)
-add_gltf("bush", 3,3,3, -36,0,25)
-add_gltf("bush", 3,3,3, -67,0,20)
-add_gltf("bush", 3,3,3, -50,0,55)
-add_gltf("bush", 3,3,3, -80,0,-0)
-add_gltf("bush", 3,3,3, -36,0,-25)
-add_gltf("bush", 3,3,3, -67,0,-60)
-
-
-add_gltf("skyscraper1", 3, 0.8, 3, 0, 0, 170);
-add_gltf("skyscraper1", 3, 1.2, 3, 30, 0, 170);
-add_gltf("skyscraper1", 3, 1, 3, 60, 0, 170);
-add_gltf("skyscraper1", 3, 1.1, 3, 90, 0, 170);
-add_gltf("skyscraper1", 3, 0.9, 3, 120, 0, 170);
-add_gltf("skyscraper1", 3, 1, 3, 150, 0, 170);
-add_gltf("skyscraper1", 3, 1, 3, -30, 0, 170);
-add_gltf("skyscraper1", 3, 1.1, 3, -60, 0, 170);
-add_gltf("skyscraper1", 3, 0.8, 3, -90, 0, 170);
-add_gltf("skyscraper1", 3, 1.5, 3, -120, 0, 170);
-add_gltf("skyscraper1", 3, 1.3, 3, -150, 0, 170);
-
-
-add_gltf("skyscraper1", 3, 1.3, 3, -150, 0, 150);
-add_gltf("skyscraper1", 3, 1.2, 3, -150, 0, 120);
-add_gltf("skyscraper1", 3, 1.1, 3, -150, 0, 90);
-add_gltf("skyscraper1", 3, 1.0, 3, -150, 0, 60);
-add_gltf("skyscraper1", 3, 1.2, 3, -150, 0, 30);
-add_gltf("skyscraper1", 3, 0.8, 3, -150, 0, 0);
-add_gltf("skyscraper1", 3, 0.9, 3, -150, 0, -30);
-add_gltf("skyscraper1", 3, 1.1, 3, -150, 0, -60);
-add_gltf("skyscraper1", 3, 1.1, 3, -150, 0, -90);
-add_gltf("skyscraper1", 3, 1.0, 3, -150, 0, -120);
-add_gltf("skyscraper1", 3, 1.1, 3, -150, 0, -150);
-
-
-add_gltf("skyscraper1", 3, 0.8, 3, 0, 0, -170);
-add_gltf("skyscraper1", 3, 1.2, 3, 30, 0, -170);
-add_gltf("skyscraper1", 3, 1, 3, 60, 0, -170);
-add_gltf("skyscraper1", 3, 1.1, 3, 90, 0, -170);
-add_gltf("skyscraper1", 3, 0.9, 3, 120, 0, -170);
-add_gltf("skyscraper1", 3, 1, 3, 150, 0, -170);
-add_gltf("skyscraper1", 3, 1, 3, -30, 0, -170);
-add_gltf("skyscraper1", 3, 1.1, 3, -60, 0, -170);
-add_gltf("skyscraper1", 3, 0.8, 3, -90, 0, -170);
-add_gltf("skyscraper1", 3, 1.5, 3, -120, 0, -170);
-add_gltf("skyscraper1", 3, 1.3, 3, -150, 0, -170);
-
-
-add_gltf("skyscraper1", 3, 1.3, 3, 150, 0, 150);
-add_gltf("skyscraper1", 3, 1.2, 3, 150, 0, 120);
-add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, 90);
-add_gltf("skyscraper1", 3, 1.0, 3, 150, 0, 60);
-add_gltf("skyscraper1", 3, 1.2, 3, 150, 0, 30);
-add_gltf("skyscraper1", 3, 0.8, 3, 150, 0, 0);
-add_gltf("skyscraper1", 3, 0.9, 3, 150, 0, -30);
-add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, -60);
-add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, -90);
-add_gltf("skyscraper1", 3, 1.0, 3, 150, 0, -120);
-add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, -150);
-
-
-
-
-
 
 
 // Animation loop
