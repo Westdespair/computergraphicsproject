@@ -7,6 +7,7 @@ Open the project folder in a terminal and run the following commands:
 npm install
 npm run dev
 ```
+If the browser window doesn't open automatically, the server should be running at http://127.0.0.1:8080
 
 -- Controls --
 Left click and hold: Rotate camera
@@ -24,10 +25,10 @@ Drag: move or rotate object
 
 -- UI Elements --
 -LEFT SIDE-
-Sun position E->W slider: Changes the sun position in the sky
+Sun position E -> W slider: Changes the sun position in the sky. By default the camera is looking towards north.
 Shape dropdown and button: Changes which shape will be added. Click add object to add the selected shape
 FOV slider: Change the field of view of the user camera
 
 -RIGHT SIDE-
 Calculate shadow heatmap: Calculates the shadow values for a day in the park
-# Samples for sun position: Determines the quality of the heatmap. Can become performance heavy. Around 50 samples is accurate without sacrificing too much performance
+# Samples for sun position: Determines the quality of the heatmap. Can become performance heavy. Around 50-100 samples is accurate without sacrificing too much performance
