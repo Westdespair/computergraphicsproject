@@ -8,6 +8,7 @@ import { Park } from '/src/objects/park.js';
 import { Cube } from '/src/objects/cube.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {BufferGeometry} from "three";
+import {Road} from "./objects/roads.js";
 
 
 const sun_position = document.getElementById('sun_slider');
@@ -110,6 +111,9 @@ main_canvas.onmousedown = function(event) {
     }
 };
 
+main_canvas.onmouseup = function(event) {
+    orbit.enabled = true;
+}
 
 addButton.onclick = function() {
     const name = (shape.value)
@@ -166,14 +170,34 @@ function add_cube() {
 
 
 
-function add_gltf(object) {
+
+
+
+function add_gltf(object, scalex, scaley, scalez, posx, posy, posz) {
+    if (scalex === undefined) {
+        scalex = 1;
+    } if (scaley === undefined) {
+        scaley = 1;
+    } if (scalez === undefined) {
+        scalez = 1;
+    } if (posx === undefined) {
+        posx = 0;
+    } if (posy === undefined) {
+        posy = 0;
+    } if (posz === undefined) {
+        posz = 0;
+    }
+
     // Randomize x, z position and color
-    const pos = new THREE.Vector3(Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2);
+
+    const pos = new THREE.Vector3(posx, 0.5, posz);
+    console.log(pos);
     const gltfLoader = new GLTFLoader();
     gltfLoader.load('res/objects/'+object+'.gltf', (gltf) => {
         const root = gltf.scene;
-        gltf.scene.children[0].scale.set(1*gltf.scene.children[0].scale.x,1*gltf.scene.children[0].scale.y, 1*gltf.scene.children[0].scale.z);
-        gltf.scene.position.set(pos);
+        gltf.scene.children[0].scale.set(scalex*gltf.scene.children[0].scale.x, scaley*gltf.scene.children[0].scale.y, scalez*gltf.scene.children[0].scale.z);
+        gltf.scene.children[0].position.set(posx, 0.5, posz);
+        console.log(gltf.scene.position);
         gltf.scene.children[0].recieveShadow = true;
         gltf.scene.children[0].castShadow = true;
         group.add(gltf.scene.children[0]);
@@ -183,7 +207,7 @@ function add_gltf(object) {
 
 // Key events
 document.addEventListener('keydown', function(event) {
-    if (event.key == "Delete") {
+    if (event.key === "Delete") {
         if (control.enabled) {
             group.remove(control.object);
             control.deselect();
@@ -219,9 +243,35 @@ window.addEventListener( 'resize', function() {
 });
 
 const sun = new Sun(group);
-sun.disableHelper(); 
+sun.disableHelper();
+
+let ground_length = 1000;
+let ground_width = 1000;
 const ground = new Ground(group, new THREE.Vector3(0, 0, 0), 1000, 1000, 0x262626);
 const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 20, 20, 0x0e6e28);
+
+
+for (let i = -400; i < 400; i = i + 200) {
+    if (i !== 0) {
+        let road = new Road(group, new THREE.Vector3(0, 0.03, i), 1000, 20, 0x949494, ground_length / 6, 6);
+    }
+}
+
+for (let i = -400; i < 400; i = i + 200) {
+    if (i !== 0) {
+        let road = new Road(group, new THREE.Vector3(i, 0.03, 0), 1000, 20, 0x949494, 1, 6);
+    }
+}
+
+// Add some cars
+add_gltf("car", 5, 5, 5, 50, 0, 200);
+add_gltf("truck", 5, 5, 5, -50, 0, -200);
+
+function updateCars() {
+
+}
+
+
 
 const global_light = new THREE.AmbientLight( 0xffffff, 0.2 );
 scene.add( global_light );
@@ -239,6 +289,7 @@ function render() {
     sun.setPosition(sun_position.value);
     renderer.clear();
     renderer.render( scene, camera );
+    updateCars();
 }
 
 animate();
