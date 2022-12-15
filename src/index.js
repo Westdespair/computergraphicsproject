@@ -115,7 +115,7 @@ addButton.onclick = function() {
         break;
 
         case "House":
-            add_gltf("enebolig1")
+            add_gltf("house")
         break;
 
         case "Tree":
@@ -403,6 +403,17 @@ function setUpScene() {
     add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, -90);
     add_gltf("skyscraper1", 3, 1.0, 3, 150, 0, -120);
     add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, -150);
+
+    add_gltf("house", 3, 0.8, 3, -150, 0, -240);
+    add_gltf("house", 3, 1.2, 3, -90, 0, -240);
+    add_gltf("house", 3, 1, 3, -30, 0, -240);
+    add_gltf("house", 3, 1.1, 3, 30, 0, -240);
+    add_gltf("house", 3, 0.9, 3, 90, 0, -240);
+    add_gltf("house", 3, 1, 3, 150, 0, -240);
+
+
+
+
 
 }
 
