@@ -172,11 +172,11 @@ let truck1;
 
 function add_gltf(object, scalex, scaley, scalez, posx, posy, posz) {
     if (scalex === undefined) {
-        scalex = 1;
+        scalex = 3;
     } if (scaley === undefined) {
-        scaley = 1;
+        scaley = 3;
     } if (scalez === undefined) {
-        scalez = 1;
+        scalez = 3;
     } if (posx === undefined) {
         posx = 0;
     } if (posy === undefined) {
@@ -253,7 +253,7 @@ sun.disableHelper();
 let ground_length = 1000;
 let ground_width = 1000;
 const ground = new Ground(group, new THREE.Vector3(0, 0, 0), ground_width, ground_length, 0x262626);
-const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 80, 160, 0x0e6e28);
+const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 250, 300, 0x0e6e28);
 
 
 for (let i = -400; i < 400; i = i + 200) {
@@ -295,31 +295,97 @@ scene.add( group );
 scene.add( control );
 
 
+add_gltf("landmark", 3, 3, 3, 0, 0, -120);
+/**
+add_gltf("tree", 2,3,2, 30, 0, -60);
+add_gltf("tree", 2,3.5,2, 30, 0, -70);
+add_gltf("tree", 2,4,2, 30, 0, -80);
+add_gltf("tree", 2,4,2, 30, 0, -90);
+add_gltf("tree", 2,3.5,2, 30, 0, -100);
+add_gltf("tree", 2,3,2, 30, 0, -110);
+add_gltf("tree", 2,3,2, -30, 0, -60);
+add_gltf("tree", 2,3.5,2, -30, 0, -70);
+add_gltf("tree", 2,4,2, -30, 0, -80);
+add_gltf("tree", 2,4,2, -30, 0, -90);
+add_gltf("tree", 2,3.5,2, -30, 0, -100);
+add_gltf("tree", 2,3,2, -30, 0, -110);
+
+add_gltf("swingset", 3,3,3, 100,0,120)
+add_gltf("swingset", 3,3,3, 100,0,90)
+add_gltf("swingset", 3,3,3, 100,0,50)
+
+add_gltf("parkbench", 3,3,3, -10,0,-100)
+add_gltf("parkbench", 3,3,3, 10,0,-100)
+
+add_gltf("picnicbench", 3,3,3, 0,0,0)
+add_gltf("picnicbench", 3,3,3, 0,0,-30)
+ */
+
+/**
+add_gltf("bush", 3,3,3, 100,0,35)
+add_gltf("bush", 3,3,3, 100,0,30)
+add_gltf("bush", 3,3,3, 100,0,25)
+add_gltf("bush", 3,3,3, 100,0,20)
+add_gltf("bush", 3,3,3, 95,0,35)
+add_gltf("bush", 3,3,3, 95,0,30)
+add_gltf("bush", 3,3,3, 95,0,25)
+add_gltf("bush", 3,3,3, 95,0,20)
 
 
-add_gltf("skyscraper1", 3, 0.8, 3, 0, 0, 240);
-add_gltf("skyscraper1", 3, 1.2, 3, 30, 0, 240);
-add_gltf("skyscraper1", 3, 1, 3, 60, 0, 240);
-add_gltf("skyscraper1", 3, 1.1, 3, 90, 0, 240);
-add_gltf("skyscraper1", 3, 0.9, 3, 120, 0, 240);
-add_gltf("skyscraper1", 3, 1, 3, 150, 0, 240);
-add_gltf("skyscraper1", 3, 1.3, 3, 240, 0, 240);
-add_gltf("skyscraper1", 3, 1, 3, -30, 0, 240);
-add_gltf("skyscraper1", 3, 1.1, 3, -60, 0, 240);
-add_gltf("skyscraper1", 3, 0.8, 3, -90, 0, 240);
-add_gltf("skyscraper1", 3, 1.5, 3, -120, 0, 240);
-add_gltf("skyscraper1", 3, 1.3, 3, -150, 0, 240);
-add_gltf("skyscraper1", 3, 1, 3, -240, 0, 240);
-add_gltf("skyscraper1", 3, 1.3, 3, -270, 0, 240);
+add_gltf("bush", 3,3,3, -50,0,35)
+add_gltf("bush", 3,3,3, -80,0,30)
+add_gltf("bush", 3,3,3, -36,0,25)
+add_gltf("bush", 3,3,3, -67,0,20)
+add_gltf("bush", 3,3,3, -50,0,55)
+add_gltf("bush", 3,3,3, -80,0,-0)
+add_gltf("bush", 3,3,3, -36,0,-25)
+add_gltf("bush", 3,3,3, -67,0,-60)
+ */
 
 
-add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 150);
-add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 120);
-add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 90);
-add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 60);
-add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 30);
-add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, 0);
-add_gltf("skyscraper1", 3, 1.3, 3, -240, 0, -30);
+
+
+
+add_gltf("skyscraper1", 3, 0.8, 3, 0, 0, 170);
+add_gltf("skyscraper1", 3, 1.2, 3, 30, 0, 170);
+add_gltf("skyscraper1", 3, 1, 3, 60, 0, 170);
+add_gltf("skyscraper1", 3, 1.1, 3, 90, 0, 170);
+add_gltf("skyscraper1", 3, 0.9, 3, 120, 0, 170);
+add_gltf("skyscraper1", 3, 1, 3, 150, 0, 170);
+add_gltf("skyscraper1", 3, 1, 3, -30, 0, 170);
+add_gltf("skyscraper1", 3, 1.1, 3, -60, 0, 170);
+add_gltf("skyscraper1", 3, 0.8, 3, -90, 0, 170);
+add_gltf("skyscraper1", 3, 1.5, 3, -120, 0, 170);
+add_gltf("skyscraper1", 3, 1.3, 3, -150, 0, 170);
+
+
+add_gltf("skyscraper1", 3, 1.3, 3, -150, 0, 150);
+add_gltf("skyscraper1", 3, 1.2, 3, -150, 0, 120);
+add_gltf("skyscraper1", 3, 1.1, 3, -150, 0, 90);
+add_gltf("skyscraper1", 3, 1.0, 3, -150, 0, 60);
+add_gltf("skyscraper1", 3, 1.2, 3, -150, 0, 30);
+add_gltf("skyscraper1", 3, 0.8, 3, -150, 0, 0);
+add_gltf("skyscraper1", 3, 0.9, 3, -150, 0, -30);
+add_gltf("skyscraper1", 3, 1.1, 3, -150, 0, -60);
+add_gltf("skyscraper1", 3, 1.1, 3, -150, 0, -90);
+add_gltf("skyscraper1", 3, 1.0, 3, -150, 0, -120);
+add_gltf("skyscraper1", 3, 1.1, 3, -150, 0, -150);
+
+
+add_gltf("skyscraper1", 3, 0.8, 3, 0, 0, -170);
+add_gltf("skyscraper1", 3, 1.2, 3, 30, 0, -170);
+add_gltf("skyscraper1", 3, 1, 3, 60, 0, -170);
+add_gltf("skyscraper1", 3, 1.1, 3, 90, 0, -170);
+add_gltf("skyscraper1", 3, 0.9, 3, 120, 0, -170);
+add_gltf("skyscraper1", 3, 1, 3, 150, 0, -170);
+add_gltf("skyscraper1", 3, 1, 3, -30, 0, -170);
+add_gltf("skyscraper1", 3, 1.1, 3, -60, 0, -170);
+add_gltf("skyscraper1", 3, 0.8, 3, -90, 0, -170);
+add_gltf("skyscraper1", 3, 1.5, 3, -120, 0, -170);
+add_gltf("skyscraper1", 3, 1.3, 3, -150, 0, -170);
+
+
+
 
 
 
