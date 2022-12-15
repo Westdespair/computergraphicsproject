@@ -10,7 +10,6 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {BufferGeometry} from "three";
 import {Road} from "./objects/roads.js";
 
-
 const sun_position = document.getElementById('sun_slider');
 const add_cube_btn = document.getElementById('add_cube_btn');
 const fov_slider = document.getElementById('fov_slider');
@@ -105,7 +104,7 @@ main_canvas.onmousedown = function(event) {
     if ( intersected_meshes.length > 0 ) {
         const object = intersected_meshes[0].object;
         // Avoid selecting the ground or park
-        if (object != ground.mesh && object != park.mesh && object != sun.mesh) {
+        if (object !== ground.mesh && object !== park.mesh) {
             control.select(object);
         }
     }
@@ -175,7 +174,8 @@ function add_cube() {
 
 
 
-
+let car1;
+let truck1;
 function add_gltf(object, scalex, scaley, scalez, posx, posy, posz) {
     if (scalex === undefined) {
         scalex = 1;
@@ -193,17 +193,22 @@ function add_gltf(object, scalex, scaley, scalez, posx, posy, posz) {
 
     // Randomize x, z position and color
     const pos = new THREE.Vector3(posx, 0.5, posz);
-    console.log(pos);
     const gltfLoader = new GLTFLoader();
     gltfLoader.load('res/objects/'+object+'.gltf', (gltf) => {
         const root = gltf.scene;
         gltf.scene.children[0].scale.set(scalex*gltf.scene.children[0].scale.x, scaley*gltf.scene.children[0].scale.y, scalez*gltf.scene.children[0].scale.z);
-        gltf.scene.children[0].position.set(posx, 0.5, posz);
-        console.log(gltf.scene.position);
+        gltf.scene.children[0].position.set(posx, posy, posz);
         gltf.scene.children[0].recieveShadow = true;
         gltf.scene.children[0].castShadow = true;
         group.add(gltf.scene.children[0]);
+        if (object === "car") {
+            car1 = group.children[group.children.length-1];
+        } else if (object === "truck") {
+            truck1 = group.children[group.children.length-1];
+
+        }
     })
+
 }
 
 
@@ -214,13 +219,13 @@ document.addEventListener('keydown', function(event) {
             group.remove(control.object);
             control.deselect();
         }
-    } else if (event.key == "Escape") {
+    } else if (event.key === "Escape") {
         control.deselect();
-    } else if (event.key == "Shift") {
+    } else if (event.key === "Shift") {
         control.setTranslationSnap(0.5);
         control.setRotationSnap(THREE.MathUtils.degToRad(15));
-    } else if (event.key.toLowerCase() == "r") {
-        if (control.mode == "rotate") {
+    } else if (event.key.toLowerCase() === "r") {
+        if (control.mode === "rotate") {
             control.setMode("translate");
             control.showX = true; control.showY = false; control.showZ = true;
         } else {
@@ -231,7 +236,7 @@ document.addEventListener('keydown', function(event) {
 });
 
 document.addEventListener( 'keyup', function(event) {
-    if (event.key == "Shift") {
+    if (event.key === "Shift") {
         control.setTranslationSnap(null);
         control.setRotationSnap(null);
     }
@@ -241,7 +246,7 @@ document.addEventListener( 'keyup', function(event) {
 window.addEventListener( 'resize', function() {
     camera.aspect = main_canvas.parentElement.clientWidth / main_canvas.parentElement.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize( main_canvas.parentElement.clientWidth, main_canvas.parentElement.clientHeight ); 
+    renderer.setSize( main_canvas.parentElement.clientWidth, main_canvas.parentElement.clientHeight );
 });
 
 const sun = new Sun(group);
@@ -255,13 +260,13 @@ const park = new Park(group, new THREE.Vector3(0, 0.05, 0), 20, 20, 0x0e6e28);
 
 for (let i = -400; i < 400; i = i + 200) {
     if (i !== 0) {
-        let road = new Road(group, new THREE.Vector3(0, 0.03, i), 1000, 20, 0x949494, ground_length / 6, 6);
+        let road = new Road(group, new THREE.Vector3(0, 0.05, i), 1000, 20, 0x949494, ground_length / 6, 6);
     }
 }
 
 for (let i = -400; i < 400; i = i + 200) {
     if (i !== 0) {
-        let road = new Road(group, new THREE.Vector3(i, 0.03, 0), 1000, 20, 0x949494, 1, 6);
+        let road = new Road(group, new THREE.Vector3(i, 0.05, 0), 1000, 20, 0x949494, 1, 6);
     }
 }
 
@@ -270,7 +275,16 @@ add_gltf("car", 5, 5, 5, 50, 0, 200);
 add_gltf("truck", 5, 5, 5, -50, 0, -200);
 
 function updateCars() {
+    car1.position.x -= 1;
 
+    truck1.position.x -= 1;
+
+    if (car1.position.x < -500) {
+        car1.position.x = 500;
+    }
+    if (truck1.position.x < -500) {
+        truck1.position.x = 500;
+    }
 }
 
 scene.add( group );
