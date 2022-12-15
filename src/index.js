@@ -18,9 +18,9 @@ const reset_camera_btn = document.getElementById('reset_camera_btn');
 const main_canvas = document.getElementById('main_canvas');
 const heatmap_canvas = document.getElementById('heatmap_canvas');
 const addButton = document.getElementById("addBtn");
-
-
-
+const heatmapSamples = document.getElementById("calc_samples");
+const heatmapProgress = document.getElementById("calc_progress");
+const heatmapCalcButton = document.getElementById("calc_heatmap_btn");
 
 
 const scene = new THREE.Scene();
@@ -105,7 +105,7 @@ main_canvas.onmousedown = function(event) {
     if ( intersected_meshes.length > 0 ) {
         const object = intersected_meshes[0].object;
         // Avoid selecting the ground or park
-        if (object != ground.mesh && object != park.mesh) {
+        if (object != ground.mesh && object != park.mesh && object != sun.mesh) {
             control.select(object);
         }
     }
@@ -160,6 +160,11 @@ addButton.onclick = function() {
 
 }
 
+// Reset heatmap calculation
+heatmapCalcButton.onclick = function() {
+    park.initRenderHeatmap(group, sun, heatmap_canvas, heatmapSamples.value, heatmapProgress);
+}
+
 
 function add_cube() {
     // Randomize x, z position and color
@@ -167,8 +172,6 @@ function add_cube() {
     const color = Math.random() * 0xffffff;
     const cube = new Cube(group, pos, new THREE.Vector3(1, 1, 1), color);
 };
-
-
 
 
 
@@ -189,7 +192,6 @@ function add_gltf(object, scalex, scaley, scalez, posx, posy, posz) {
     }
 
     // Randomize x, z position and color
-
     const pos = new THREE.Vector3(posx, 0.5, posz);
     console.log(pos);
     const gltfLoader = new GLTFLoader();
@@ -271,11 +273,6 @@ function updateCars() {
 
 }
 
-
-
-const global_light = new THREE.AmbientLight( 0xffffff, 0.2 );
-scene.add( global_light );
-
 scene.add( group );
 scene.add( control );
 
@@ -286,9 +283,10 @@ function animate() {
 };
 
 function render() {
-    sun.setPosition(sun_position.value);
+    park.stepRenderHeatmap();
     renderer.clear();
     renderer.render( scene, camera );
+    sun.setPosition(sun_position.value * THREE.MathUtils.DEG2RAD);
     updateCars();
 }
 

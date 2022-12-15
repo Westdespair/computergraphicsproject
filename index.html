@@ -18,7 +18,7 @@
             </p>
             <label for="sun_slider">Sun position</label>
 
-            <input type="range" id="sun_slider" min="0" max="359" value="180" step="1">
+            <input type="range" id="sun_slider" min="10" max="170" value="90" step="1">
 
 
             <p>
@@ -59,9 +59,15 @@
 
         <div class="output">
             Park lighting: <br>
-            <canvas id="heatmap_canvas" width="100" height="100">
+            <canvas id="heatmap_canvas" width="40" height="20">
                 Please use a browser that supports "canvas"
             </canvas>
+            
+            <button id="calc_heatmap_btn">Calculate shadow heatmap</button> <br>
+            <label for="calc_samples">Samples:</label>
+            <input id="calc_samples" type="number" value="100" min="1" max="1000" step="1"> <br>
+            <label for="calc_progress">Calculation progress:</label>
+            <progress id="calc_progress" value="0" max="1"> 0% </progress>
         </div>
     </body>
 
