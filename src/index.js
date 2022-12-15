@@ -56,7 +56,6 @@ control.select = function(object) {
 };
 control.deselect = function() {
     if( this.object != null ) {
-        this.object.material.transparent=false;
         this.object.material.opacity=1;
         this.object.material.emissive.set( 0x000000 );
     }
