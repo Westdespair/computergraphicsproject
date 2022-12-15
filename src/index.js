@@ -296,7 +296,7 @@ scene.add( control );
 
 
 add_gltf("landmark", 3, 3, 3, 0, 0, -120);
-/**
+
 add_gltf("tree", 2,3,2, 30, 0, -60);
 add_gltf("tree", 2,3.5,2, 30, 0, -70);
 add_gltf("tree", 2,4,2, 30, 0, -80);
@@ -319,9 +319,9 @@ add_gltf("parkbench", 3,3,3, 10,0,-100)
 
 add_gltf("picnicbench", 3,3,3, 0,0,0)
 add_gltf("picnicbench", 3,3,3, 0,0,-30)
- */
 
-/**
+
+
 add_gltf("bush", 3,3,3, 100,0,35)
 add_gltf("bush", 3,3,3, 100,0,30)
 add_gltf("bush", 3,3,3, 100,0,25)
@@ -340,10 +340,6 @@ add_gltf("bush", 3,3,3, -50,0,55)
 add_gltf("bush", 3,3,3, -80,0,-0)
 add_gltf("bush", 3,3,3, -36,0,-25)
 add_gltf("bush", 3,3,3, -67,0,-60)
- */
-
-
-
 
 
 add_gltf("skyscraper1", 3, 0.8, 3, 0, 0, 170);
@@ -385,6 +381,17 @@ add_gltf("skyscraper1", 3, 1.5, 3, -120, 0, -170);
 add_gltf("skyscraper1", 3, 1.3, 3, -150, 0, -170);
 
 
+add_gltf("skyscraper1", 3, 1.3, 3, 150, 0, 150);
+add_gltf("skyscraper1", 3, 1.2, 3, 150, 0, 120);
+add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, 90);
+add_gltf("skyscraper1", 3, 1.0, 3, 150, 0, 60);
+add_gltf("skyscraper1", 3, 1.2, 3, 150, 0, 30);
+add_gltf("skyscraper1", 3, 0.8, 3, 150, 0, 0);
+add_gltf("skyscraper1", 3, 0.9, 3, 150, 0, -30);
+add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, -60);
+add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, -90);
+add_gltf("skyscraper1", 3, 1.0, 3, 150, 0, -120);
+add_gltf("skyscraper1", 3, 1.1, 3, 150, 0, -150);
 
 
 
